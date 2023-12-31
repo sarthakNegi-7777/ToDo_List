@@ -34,7 +34,7 @@ function update() {
             <th scope="row">${index + 1}</th>
             <td>${element[0]}</td>
             <td>${element[1]}</td> 
-            <td><button class="btn btn-sm btn-primary" onclick="deleted(${index})">Delete</button></td> 
+            <td><button class="btn btn-sm btn-danger" onclick="deleted(${index})">Remove</button></td>
             </tr>`;
     });
     tableBody.innerHTML = str;
@@ -42,6 +42,7 @@ function update() {
 add = document.getElementById("add");
 add.addEventListener("click", getAndUpdate);
 update();
+
 function deleted(itemIndex) {
     console.log("Delete", itemIndex);
     itemJsonArrayStr = localStorage.getItem('itemsJson')
@@ -50,8 +51,8 @@ function deleted(itemIndex) {
     itemJsonArray.splice(itemIndex, 1);
     localStorage.setItem('itemsJson', JSON.stringify(itemJsonArray));
     update();
-
 }
+
 function clearStorage() {
     if (confirm("Do you really want to clear ?")) {
         console.log('Clearing the storage')
