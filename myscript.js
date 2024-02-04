@@ -2,18 +2,25 @@ function getAndUpdate() {
     console.log("Updating List...");
     tit = document.getElementById('title').value;
     desc = document.getElementById('description').value;
-    if (localStorage.getItem('itemsJson') == null) {
-        itemJsonArray = [];
-        itemJsonArray.push([tit, desc]);
-        localStorage.setItem('itemsJson', JSON.stringify(itemJsonArray))
+
+    // Check if the title is not empty
+    if (tit.trim() !== "") {
+        if (localStorage.getItem('itemsJson') == null) {
+            itemJsonArray = [];
+            itemJsonArray.push([tit, desc]);
+            localStorage.setItem('itemsJson', JSON.stringify(itemJsonArray))
+        }
+        else {
+            itemJsonArrayStr = localStorage.getItem('itemsJson')
+            itemJsonArray = JSON.parse(itemJsonArrayStr);
+            itemJsonArray.push([tit, desc]);
+            localStorage.setItem('itemsJson', JSON.stringify(itemJsonArray))
+        }
+        update();
+    } else {
+        // Alert the user when the title is empty
+        alert("Title cannot be empty !!!");
     }
-    else {
-        itemJsonArrayStr = localStorage.getItem('itemsJson')
-        itemJsonArray = JSON.parse(itemJsonArrayStr);
-        itemJsonArray.push([tit, desc]);
-        localStorage.setItem('itemsJson', JSON.stringify(itemJsonArray))
-    }
-    update();
 }
 
 function update() {
