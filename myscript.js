@@ -8,15 +8,18 @@ function getAndUpdate() {
         if (localStorage.getItem('itemsJson') == null) {
             itemJsonArray = [];
             itemJsonArray.push([tit, desc]);
-            localStorage.setItem('itemsJson', JSON.stringify(itemJsonArray))
+            localStorage.setItem('itemsJson', JSON.stringify(itemJsonArray));
         }
         else {
-            itemJsonArrayStr = localStorage.getItem('itemsJson')
+            itemJsonArrayStr = localStorage.getItem('itemsJson');
             itemJsonArray = JSON.parse(itemJsonArrayStr);
             itemJsonArray.push([tit, desc]);
-            localStorage.setItem('itemsJson', JSON.stringify(itemJsonArray))
+            localStorage.setItem('itemsJson', JSON.stringify(itemJsonArray));
         }
         update();
+        // Clear the title and description fields
+        document.getElementById('title').value = "";
+        document.getElementById('description').value = "";
     } else {
         // Alert the user when the title is empty
         alert("Title cannot be empty !!!");
@@ -26,10 +29,10 @@ function getAndUpdate() {
 function update() {
     if (localStorage.getItem('itemsJson') == null) {
         itemJsonArray = [];
-        localStorage.setItem('itemsJson', JSON.stringify(itemJsonArray))
+        localStorage.setItem('itemsJson', JSON.stringify(itemJsonArray));
     }
     else {
-        itemJsonArrayStr = localStorage.getItem('itemsJson')
+        itemJsonArrayStr = localStorage.getItem('itemsJson');
         itemJsonArray = JSON.parse(itemJsonArrayStr);
     }
     // Populate the table
@@ -52,7 +55,7 @@ update();
 
 function deleted(itemIndex) {
     console.log("Delete", itemIndex);
-    itemJsonArrayStr = localStorage.getItem('itemsJson')
+    itemJsonArrayStr = localStorage.getItem('itemsJson');
     itemJsonArray = JSON.parse(itemJsonArrayStr);
     // Delete itemIndex element from the array
     itemJsonArray.splice(itemIndex, 1);
@@ -62,8 +65,8 @@ function deleted(itemIndex) {
 
 function clearStorage() {
     if (confirm("Do you really want to clear ?")) {
-        console.log('Clearing the storage')
+        console.log('Clearing the storage');
         localStorage.clear();
-        update()
+        update();
     }
 }
